@@ -1,5 +1,11 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.net.InetAddress;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EtchedBorder;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -13,25 +19,43 @@ public class MainFrame extends JFrame {
 
     JMenuItem fileMenuList[];
     JMenuItem resultMenuList[];
+    JPanel insertInfo;
+    JScrollPane infoList;
 
     public MainFrame() {
         this.setTitle("COVID Alert");
         this.setSize(1600, 900);
+        // 레이아웃 설정
+        this.setLayout(new BorderLayout());
+        // 창 크기 변경 불가능
         this.setResizable(false);
+        // 메인프레임 배경색 지정
+        this.setBackground(Color.GRAY);
 
+        ///// 메뉴바 설정 /////
         JMenuBar mainBar = new JMenuBar();
         mainBar.setSize(1600, 30);
-
+        mainBar.setBorder(new EtchedBorder());
         this.SetMenuList();
 
         mainBar.add(fileMenu);
         mainBar.add(resultMenu);
         mainBar.add(selfcheckMenu);
+        /////////////////////
 
-        this.add(mainBar);
-        this.add(new JPanel());
+        // 메인 바 추가
+        this.add(mainBar, BorderLayout.NORTH);
 
+        ///// 패널 설치 /////
+        insertInfo = new InsertInfo();
+        infoList = new InfoList();
+
+        this.add(insertInfo, BorderLayout.EAST);
+        this.add(infoList, BorderLayout.WEST);
+
+        // 창 종료
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // 보이도록 설정
         this.setVisible(true);
     }
 
