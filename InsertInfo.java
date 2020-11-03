@@ -310,6 +310,7 @@ public class InsertInfo extends JPanel {
     // downside 패널의 컴포넌트 배치
     void ComponentAtDownside() {
         downside.setLayout(new FlowLayout(30, 70, 30));
+        downside.setBackground(new Color(245, 245, 245));
 
         JPanel temp1 = new JPanel();
         temp1.setSize(163, 100);
