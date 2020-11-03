@@ -32,7 +32,7 @@ public class Patient {
     String modified_Date;
 
     // 노출여부
-    char exposure;
+    String exposure;
 
     // 매개변수를 받지 않았을 시
     public Patient() {
@@ -46,13 +46,13 @@ public class Patient {
         this.setRoute("");
         this.setRegistraion_Date("2020.00.00");
         this.setModified_Date("2020.00.00");
-        this.setExposure('N');
+        this.setExposure("N");
     }
 
     // 매개변수를 받았을 시
     public Patient(int id, String influe_Date, int patient_Number, String residence, String travel,
             String connect_region, String patient_Status, String route, String registraion_Date, String modified_Date,
-            char exposure) {
+            String exposure) {
         this.setId(id);
         this.setInflue_Date(influe_Date);
         this.setPatient_Number(patient_Number);
@@ -106,7 +106,7 @@ public class Patient {
         this.modified_Date = modified_Date;
     }
 
-    public void setExposure(char exposure) {
+    public void setExposure(String exposure) {
         this.exposure = exposure;
     }
 
@@ -150,7 +150,7 @@ public class Patient {
         return modified_Date;
     }
 
-    public char getExposure() {
+    public String getExposure() {
         return exposure;
     }
 }

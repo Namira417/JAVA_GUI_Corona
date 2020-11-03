@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
@@ -172,7 +171,7 @@ public class InsertInfo extends JPanel {
 
     // 패널에 들어가는 컴포넌트 생성 및 초기화
     void InitComponent() {
-        componentFont = new Font("Serif", Font.BOLD, 15);
+        componentFont = new Font("맑은 고딕", Font.BOLD, 15);
         listener = new InsertInfoActionListener();
 
         this.addButton = new JButton("추가");
@@ -210,15 +209,15 @@ public class InsertInfo extends JPanel {
         downside = new JPanel();
 
         upside.setPreferredSize(new Dimension(500, 200));
-        upside.setBackground(Color.white);
+        upside.setBackground(Color.WHITE);
         upside.setBorder(new EtchedBorder());
 
         midside.setPreferredSize(new Dimension(500, 570));
-        midside.setBackground(Color.white);
+        midside.setBackground(Color.WHITE);
         midside.setBorder(new EtchedBorder());
 
         downside.setPreferredSize(new Dimension(500, 100));
-        downside.setBackground(Color.white);
+        downside.setBackground(Color.WHITE);
         downside.setBorder(new EtchedBorder());
 
         ComponentAtUpside();
@@ -234,12 +233,12 @@ public class InsertInfo extends JPanel {
     void ComponentAtUpside() {
         upside.setLayout(new GridLayout(2, 1));
 
-        Font labelFontSetting = new Font("Serif", Font.BOLD, 20);
+        Font labelFontSetting = new Font("맑은 고딕", Font.BOLD, 20);
 
         JLabel idLabel = new JLabel("연번");
         JLabel influe_DateLabel = new JLabel("확진일");
         JLabel patient_NumberLabel = new JLabel("번호");
-        JLabel exposureLabel = new JLabel("노출 여부");
+        JLabel exposureLabel = new JLabel("노출여부");
 
         idLabel.setFont(labelFontSetting);
         influe_DateLabel.setFont(labelFontSetting);

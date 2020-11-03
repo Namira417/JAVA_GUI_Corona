@@ -169,9 +169,15 @@ public class MainFrame extends BaseFrame {
             if (e.getSource() == resultMenuList[0]) {
                 System.out.print("확진 날짜 별\n");
                 // 확진 날짜 별
+                BaseFrame temp = new ResultFrame();
+                temp.mainFrame = MainFrame.this;
+                MainFrame.this.setEnabled(false);
             } else if (e.getSource() == resultMenuList[1]) {
                 System.out.print("확진 장소 별\n");
                 // 확진 장소 별
+                BaseFrame temp = new ResultFrame();
+                temp.mainFrame = MainFrame.this;
+                MainFrame.this.setEnabled(false);
             }
         }
     }
@@ -182,6 +188,9 @@ public class MainFrame extends BaseFrame {
             if (e.getSource() == selfcheckMenuList[0]) {
                 System.out.print("자가진단표 작성\n");
                 // 자가진단표
+                BaseFrame temp = new SelfCheckFrame();
+                temp.mainFrame = MainFrame.this;
+                MainFrame.this.setEnabled(false);
             }
         }
     }
