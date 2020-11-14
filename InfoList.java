@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EtchedBorder;
 
 public class InfoList extends BasePanel {
@@ -31,18 +32,10 @@ public class InfoList extends BasePanel {
         // 레이아웃 설정
         this.setLayout(new FlowLayout(0, 5, 3));
 
-        listPane = new JPanel();
-        listPane.setLayout(new FlowLayout(FlowLayout.CENTER));
-        listPane.setPreferredSize(new Dimension(1030, 750));
-        listPane.setBackground(new Color(230, 230, 230));
-
-        listPane.add(new PatientPanel(new Patient()));
-        listPane.add(new PatientPanel(new Patient()));
-        listPane.add(new PatientPanel(new Patient()));
-        listPane.add(new PatientPanel(new Patient()));
-        listPane.add(new PatientPanel(new Patient()));
-
-        scroll = new JScrollPane(listPane);
+        String header[] = { "연번", "확진일", "번호", "거주지", "여행력", "접촉력", "상태", "이동경로", "등록일", "수정일", "노출여부" };
+        String contents[][] = { { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" } };
+        JTable table = new JTable(contents, header);
+        scroll = new JScrollPane(table);
         scroll.setPreferredSize(new Dimension(1014, 795));
 
         this.add(scroll);
