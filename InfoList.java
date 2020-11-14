@@ -33,6 +33,7 @@ public class InfoList extends BasePanel {
         this.setLayout(new FlowLayout(0, 5, 3));
 
         String header[] = { "연번", "확진일", "번호", "거주지", "여행력", "접촉력", "상태", "이동경로", "등록일", "수정일", "노출여부" };
+        //////////////// Contents 에 DB 넣으면 됨 /////////////////////////
         String contents[][] = { { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" } };
         JTable table = new JTable(contents, header);
         scroll = new JScrollPane(table);

@@ -7,11 +7,10 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
@@ -33,6 +32,7 @@ public class InsertInfo extends JPanel {
     JTextField route;
     JTextField registration_Date;
     JTextField modified_Date;
+    JTextField exposure;
 
     public JTextField getidText() {
         return idText;
@@ -114,35 +114,13 @@ public class InsertInfo extends JPanel {
         this.modified_Date = modified_Date;
     }
 
-    // 노출여부 라디오 버튼
-
-    public JRadioButton getExposure_Y() {
-        return exposure_Y;
-    }
-
-    public void setExposure(JRadioButton exposure_Y) {
-        this.exposure_Y = exposure_Y;
-    }
-
-    public JRadioButton getExposure_N() {
-        return exposure_N;
-    }
-
-    public void setExposure_N(JRadioButton exposure_N) {
-        this.exposure_N = exposure_N;
-    }
-
-    public ButtonGroup getExposure() {
-        return exposure;
-    }
-
-    public void setExposure(ButtonGroup exposure) {
+    public void setExposure(JTextField exposure) {
         this.exposure = exposure;
     }
 
-    JRadioButton exposure_Y;
-    JRadioButton exposure_N;
-    ButtonGroup exposure;
+    public JTextField getExposure() {
+        return exposure;
+    }
 
     // 컴포넌트 배치를 위한 패널
     JPanel upside;
@@ -193,14 +171,7 @@ public class InsertInfo extends JPanel {
         this.route = new JTextField(10);
         this.registration_Date = new JTextField(10);
         this.modified_Date = new JTextField(10);
-
-        exposure_Y = new JRadioButton("Y");
-        exposure_N = new JRadioButton("N");
-
-        exposure = new ButtonGroup();
-
-        exposure.add(exposure_Y);
-        exposure.add(exposure_N);
+        this.exposure = new JTextField(10);
     }
 
     void InitPanel() {
@@ -231,39 +202,34 @@ public class InsertInfo extends JPanel {
 
     // upside 패널의 컴포넌트 배치
     void ComponentAtUpside() {
-        upside.setLayout(new GridLayout(2, 1));
+        upside.setLayout(new BorderLayout());
 
-        Font labelFontSetting = new Font("맑은 고딕", Font.BOLD, 20);
+        JPanel westside = new JPanel();
+        westside.setLayout(new GridLayout(1, 1));
+        String header[] = { "연번", "확진일", "번호", "거주지", "여행력", "접촉력", "상태", "이동경로", "등록일", "수정일", "노출여부" };
+        JComboBox combobox = new JComboBox<>(header);
+        westside.add(combobox);
+        upside.add(westside, BorderLayout.WEST);
 
-        JLabel idLabel = new JLabel("연번");
-        JLabel influe_DateLabel = new JLabel("확진일");
-        JLabel patient_NumberLabel = new JLabel("번호");
-        JLabel exposureLabel = new JLabel("노출여부");
+        JPanel centerside = new JPanel();
+        centerside.setLayout(new GridLayout(1, 1));
+        JTextField search = new JTextField(25);
+        centerside.add(search);
+        upside.add(centerside, BorderLayout.CENTER);
 
-        idLabel.setFont(labelFontSetting);
-        influe_DateLabel.setFont(labelFontSetting);
-        patient_NumberLabel.setFont(labelFontSetting);
-        exposureLabel.setFont(labelFontSetting);
+        JPanel eastside = new JPanel();
+        eastside.setLayout(new GridLayout(1, 1));
+        JButton sButton = new JButton("검색");
+        eastside.add(sButton);
+        upside.add(eastside, BorderLayout.EAST);
 
-        JPanel northPane = new JPanel();
-        JPanel southPane = new JPanel();
+        JPanel northside = new JPanel();
+        northside.setPreferredSize(new Dimension(300, 80));
+        upside.add(northside, BorderLayout.NORTH);
 
-        northPane.setLayout(new FlowLayout(40, 20, 40));
-        southPane.setLayout(new FlowLayout(40, 20, 40));
-
-        northPane.add(idLabel);
-        northPane.add(idText);
-        northPane.add(influe_DateLabel);
-        northPane.add(influe_Date);
-
-        southPane.add(patient_NumberLabel);
-        southPane.add(patient_Number);
-        southPane.add(exposureLabel);
-        southPane.add(exposure_Y);
-        southPane.add(exposure_N);
-
-        upside.add(northPane);
-        upside.add(southPane);
+        JPanel southside = new JPanel();
+        southside.setPreferredSize(new Dimension(300, 80));
+        upside.add(southside, BorderLayout.SOUTH);
     }
 
     // midside 패널의 컴포넌트 배치
@@ -273,12 +239,15 @@ public class InsertInfo extends JPanel {
         JPanel leftPane = new JPanel();
         JPanel rightPane = new JPanel();
 
-        leftPane.setLayout(new GridLayout(7, 1));
-        rightPane.setLayout(new GridLayout(7, 1, 20, 10));
+        leftPane.setLayout(new GridLayout(11, 1));
+        rightPane.setLayout(new GridLayout(11, 1, 20, 10));
 
         leftPane.setPreferredSize(new Dimension(120, 300));
         rightPane.setPreferredSize(new Dimension(250, 300));
 
+        leftPane.add(new JLabel("연번", SwingConstants.CENTER));
+        leftPane.add(new JLabel("확진일", SwingConstants.CENTER));
+        leftPane.add(new JLabel("번호", SwingConstants.CENTER));
         leftPane.add(new JLabel("거주지", SwingConstants.CENTER));
         leftPane.add(new JLabel("여행력", SwingConstants.CENTER));
         leftPane.add(new JLabel("접촉력", SwingConstants.CENTER));
@@ -286,7 +255,11 @@ public class InsertInfo extends JPanel {
         leftPane.add(new JLabel("이동경로", SwingConstants.CENTER));
         leftPane.add(new JLabel("등록일", SwingConstants.CENTER));
         leftPane.add(new JLabel("수정일", SwingConstants.CENTER));
+        leftPane.add(new JLabel("노출 여부", SwingConstants.CENTER));
 
+        rightPane.add(idText);
+        rightPane.add(influe_Date);
+        rightPane.add(patient_Number);
         rightPane.add(residence);
         rightPane.add(travel);
         rightPane.add(connect_Region);
@@ -294,6 +267,7 @@ public class InsertInfo extends JPanel {
         rightPane.add(route);
         rightPane.add(registration_Date);
         rightPane.add(modified_Date);
+        rightPane.add(exposure);
 
         JPanel northBlankPane = new JPanel();
         northBlankPane.setPreferredSize(new Dimension(570, 80));
