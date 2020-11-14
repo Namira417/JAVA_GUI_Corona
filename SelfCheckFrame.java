@@ -4,10 +4,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class SelfCheckFrame extends BaseFrame {
-    JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 15));
+
+    SelfCheckPanel selfCheckPanel;
 
     public SelfCheckFrame() {
         this.setTitle("결과 보기");
@@ -15,14 +15,15 @@ public class SelfCheckFrame extends BaseFrame {
         this.setResizable(false);
         setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
-        panel.setBackground(Color.white);
+        selfCheckPanel = new SelfCheckPanel();
+
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
 
-        this.getContentPane().setBackground(new Color(0, 200, 250));
+        this.getContentPane().setBackground(new Color(245, 245, 245));
         this.addWindowListener(new ClosingEventHandler());
 
-        add(panel);
+        add(selfCheckPanel);
     }
 
     class ClosingEventHandler extends WindowAdapter {
