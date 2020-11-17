@@ -10,7 +10,7 @@ public class SelfCheckFrame extends BaseFrame {
     SelfCheckPanel selfCheckPanel;
 
     public SelfCheckFrame() {
-        this.setTitle("결과 보기");
+        this.setTitle("자가진단표");
         this.setBounds(100, 100, 800, 800);
         this.setResizable(false);
         setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));

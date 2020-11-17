@@ -3,9 +3,10 @@ import java.awt.Dimension;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -50,6 +51,15 @@ public class SelfCheckPanel extends JPanel {
         this.add(downside, BorderLayout.SOUTH);
     }
 
+    JRadioButton q1_Y;
+    JRadioButton q1_N;
+    JRadioButton q2_Y;
+    JRadioButton q2_N;
+    JRadioButton q3_Y;
+    JRadioButton q3_N;
+    JRadioButton q4_Y;
+    JRadioButton q4_N;
+
     void ComponentAtUpside() {
         upside.setLayout(new BorderLayout());
         JPanel centerside = new JPanel();
@@ -72,28 +82,21 @@ public class SelfCheckPanel extends JPanel {
         question_3.setFont(labelFontSetting);
         question_4.setFont(labelFontSetting);
 
-        JRadioButton q1_Y = new JRadioButton("Y");
-        JRadioButton q1_N = new JRadioButton("N");
-        JRadioButton q2_Y = new JRadioButton("Y");
-        JRadioButton q2_N = new JRadioButton("N");
-        JRadioButton q3_Y = new JRadioButton("Y");
-        JRadioButton q3_N = new JRadioButton("N");
-        JRadioButton q4_Y = new JRadioButton("Y");
-        JRadioButton q4_N = new JRadioButton("N");
+        q1_Y = new JRadioButton("Y");
+        q1_N = new JRadioButton("N");
+        q2_Y = new JRadioButton("Y");
+        q2_N = new JRadioButton("N");
+        q3_Y = new JRadioButton("Y");
+        q3_N = new JRadioButton("N");
+        q4_Y = new JRadioButton("Y");
+        q4_N = new JRadioButton("N");
 
-        ButtonGroup q1 = new ButtonGroup();
-        ButtonGroup q2 = new ButtonGroup();
-        ButtonGroup q3 = new ButtonGroup();
-        ButtonGroup q4 = new ButtonGroup();
+        SelfCheckActionListener listener = new SelfCheckActionListener();
 
-        q1.add(q1_Y);
-        q1.add(q1_N);
-        q2.add(q2_Y);
-        q2.add(q2_N);
-        q3.add(q3_Y);
-        q3.add(q3_N);
-        q4.add(q4_Y);
-        q4.add(q4_N);
+        q1_Y.addActionListener(listener);
+        q2_Y.addActionListener(listener);
+        q3_Y.addActionListener(listener);
+        q4_Y.addActionListener(listener);
 
         centerside.add(question_1);
         eastside.add(q1_Y);
@@ -109,11 +112,38 @@ public class SelfCheckPanel extends JPanel {
         eastside.add(q4_N);
     }
 
+    JButton showResult;
+
     void ComponentAtDownside() {
         downside.setLayout(new FlowLayout());
         downside.setBackground(new Color(245, 245, 245));
 
-        JButton showResult = new JButton("제출하기");
+        showResult = new JButton("제출하기");
         downside.add(showResult);
+
+        SelfCheckResultActionListener listener = new SelfCheckResultActionListener();
+        showResult.addActionListener(listener);
+    }
+
+    boolean SelfCheckResult = false; // Y가 하나라도 체크 될시 경고문 띄움
+
+    class SelfCheckActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == q1_Y || e.getSource() == q2_Y || e.getSource() == q3_Y || e.getSource() == q4_Y) {
+                SelfCheckResult = true;
+            }
+        }
+    }
+
+    class SelfCheckResultActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == showResult && SelfCheckResult == true) {
+                System.out.println("가까운 보건소에 가세요");
+            } else if (e.getSource() == showResult && SelfCheckResult == false) {
+                System.out.println("정상입니다.");
+            }
+        }
     }
 }
